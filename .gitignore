@@ -1,0 +1,17 @@
+*~
+*.swp
+*.tar.gz
+*.zip
+Makefile
+Makefile.old
+MANIFEST
+MANIFEST.bak
+MYMETA.*
+blib
+pm_to_blib
+node_modules/
+
+mt-static/plugins/OGPEmbed/dist/*.min.js
+mt-static/plugins/OGPEmbed/dist/*.min.css
+mt-static/plugins/OGPEmbed/dist/*.map
+mt-static/plugins/OGPEmbed/dist/*.svg

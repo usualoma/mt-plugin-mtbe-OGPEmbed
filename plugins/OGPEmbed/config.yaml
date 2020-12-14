@@ -1,0 +1,26 @@
+id: OGPEmbed
+name: OGPEmbed
+version: 0.0.1
+author_link: http://blog.taaas.jp/
+plugin_link: http://blog.taaas.jp/mt/mt-plugin-mtbe-OGPEmbed/
+author_name: Taku Amano
+description: <MT_TRANS phrase="This plugin provides block editor block types for embed other site by OGP infomation.">
+l10n_lexicon:
+  ja:
+    This plugin provides block editor block types for embed other site by OGP infomation.: "OGPのメタ情報を使ってウェブページを埋め込むブロックタイプを提供します"
+    BLOCK_LABEL_OGPEMBED: OGPEmbed
+
+editors:
+  block_editor:
+    extension: extension.tmpl
+    block_types:
+      usualoma-ogpembed:
+        label: BLOCK_LABEL_OGPEMBED
+        identifier: usualoma-ogpembed
+        is_default_hidden: 0
+        is_form_element: 0
+
+applications:
+  cms:
+    methods:
+      ogpembed_resolve: $OGPEmbed::MT::Plugin::OGPEmbed::resolve

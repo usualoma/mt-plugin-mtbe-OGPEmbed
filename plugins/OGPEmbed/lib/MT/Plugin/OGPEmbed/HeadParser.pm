@@ -40,7 +40,10 @@ sub start {
         $self->{hash}{ lc $name } = $attr->{content} if $name;
     }
     elsif ( $tag eq 'link' ) {
-        my $name = ( $attr->{rel} || "" ) =~ m{^canonical$}i ? $attr->{rel} : undef;
+        my $name
+            = ( $attr->{rel} || "" ) =~ m{^canonical$}i         ? $attr->{rel}
+            : ( $attr->{rel} || "" ) =~ m{\b(shortcut|icon)\b}i ? 'icon'
+            :                                                     undef;
         $self->{hash}{ lc $name } = $attr->{href} if $name;
     }
     elsif ( $tag =~ /^(?:title)$/ ) {

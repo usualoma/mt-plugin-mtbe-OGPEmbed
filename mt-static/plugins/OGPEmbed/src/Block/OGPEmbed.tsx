@@ -70,7 +70,7 @@ const Html: React.FC<HtmlProps> = ({ block }: HtmlProps) => {
 .ogpembed-card {
   margin: 10px;
   padding: 10px;
-  background: #eee;
+  border: 1px solid #eee;
   border-radius: 5px;
   display: flex;
   text-decoration: none;
@@ -87,13 +87,22 @@ const Html: React.FC<HtmlProps> = ({ block }: HtmlProps) => {
   color: initial;
   font-weight: bold;
 }
-.ogpembed-card__url {
-  font-size: 90%;
-  text-decoration: underline;
-}
 .ogpembed-card__description {
+  margin-top: 5px;
   color: initial;
   text-decoration: none;
+}
+.ogpembed-card__site-name {
+  margin-top: 5px;
+  font-size: 80%;
+  color: gray;
+  display: flex;
+  align-items: center;
+}
+.ogpembed-card__icon {
+  max-width: 13px;
+  max-height: 13px;
+  margin-right: 5px;
 }
 </style>
 `}
@@ -118,6 +127,7 @@ class OGPEmbed extends Block {
   }
 
   public url = "";
+  public icon: string | null = null;
   public ogType: string | null = null;
   public ogLocale: string | null = null;
   public ogTitle: string | null = null;
@@ -130,7 +140,6 @@ class OGPEmbed extends Block {
 
   public constructor(init?: Partial<OGPEmbed>) {
     super();
-    console.log(init);
     if (init) {
       Object.assign(this, init);
     }
@@ -140,6 +149,7 @@ class OGPEmbed extends Block {
     return this.metadataByOwnKeys({
       keys: [
         "url",
+        "icon",
         "ogType",
         "ogLocale",
         "ogTitle",
@@ -186,9 +196,7 @@ class OGPEmbed extends Block {
 
       const res = await promise;
 
-      console.log(res);
-      console.log(this.url);
-
+      this.icon = res.icon || "";
       this.ogType = res.ogType;
       this.ogLocale = res.ogLocale;
       this.ogTitle = res.ogTitle;
@@ -197,14 +205,25 @@ class OGPEmbed extends Block {
       this.ogUrl = res.ogUrl;
       this.ogSiteName = res.ogSiteName;
 
+      const url = new URL(res.ogUrl || this.url);
+      const name = url.hostname;
+      const icon = this.icon.match(/^https?:/)
+        ? this.icon
+        : this.icon.match(/^\/[^\/]/)
+        ? url.origin + this.icon
+        : "";
+
       this.compiledHtml = `<a class="ogpembed-card" href="${this.ogUrl}">
   <div class="ogpembed-card__image">
     <img src="${this.ogImage}" />
   </div>
   <div class="ogpembed-card__text">
     <div class="ogpembed-card__title">${this.ogTitle}</div>
-    <div class="ogpembed-card__url">${this.ogUrl}</div>
     <div class="ogpembed-card__description">${this.ogDescription}</div>
+    <div class="ogpembed-card__site-name">
+      ${icon ? `<img src="${icon}" class="ogpembed-card__icon">` : ""}
+      ${name}
+    </div>
   </div>
 </a>`;
     } catch (e) {
@@ -230,6 +249,7 @@ class OGPEmbed extends Block {
 
   private reset(): void {
     this.compiledHtml = "";
+    this.icon = null;
     this.ogType = null;
     this.ogLocale = null;
     this.ogTitle = null;

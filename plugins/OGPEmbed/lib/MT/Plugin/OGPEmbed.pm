@@ -58,7 +58,8 @@ sub resolve {
     response(
         $app,
         MT::Util::to_json(
-            {   ogType        => $hash->{"og:type"}        || '',
+            {   icon          => $hash->{icon}             || '',
+                ogType        => $hash->{"og:type"}        || '',
                 ogLocale      => $hash->{"og:locale"}      || '',
                 ogTitle       => $hash->{"og:title"}       || $hash->{"title"} || '',
                 ogDescription => $hash->{"og:description"} || $hash->{"description"} || '',

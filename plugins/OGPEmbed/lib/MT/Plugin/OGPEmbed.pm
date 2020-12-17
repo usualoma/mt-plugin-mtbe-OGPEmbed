@@ -64,8 +64,12 @@ sub resolve {
                 ogTitle       => $hash->{"og:title"}       || $hash->{"title"} || '',
                 ogDescription => $hash->{"og:description"} || $hash->{"description"} || '',
                 ogImage       => $hash->{"og:image"}       || '',
-                ogUrl         => $hash->{"og:url"}         || $hash->{"canonical"} || '',
-                ogSiteName    => $hash->{"og:site_name"}   || '',
+                ogImageWidth =>
+                    ( $hash->{"og:image:width"} ? int( $hash->{"og:image:width"} ) : undef ),
+                ogImageHeight =>
+                    ( $hash->{"og:image:height"} ? int( $hash->{"og:image:height"} ) : undef ),
+                ogUrl      => $hash->{"og:url"}       || $hash->{"canonical"} || '',
+                ogSiteName => $hash->{"og:site_name"} || '',
             }
         )
     );

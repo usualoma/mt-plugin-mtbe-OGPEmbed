@@ -133,6 +133,8 @@ class OGPEmbed extends Block {
   public ogTitle: string | null = null;
   public ogDescription: string | null = null;
   public ogImage: string | null = null;
+  public ogImageWidth: number | null = null;
+  public ogImageHeight: number | null = null;
   public ogUrl: string | null = null;
   public ogSiteName: string | null = null;
 
@@ -202,6 +204,8 @@ class OGPEmbed extends Block {
       this.ogTitle = res.ogTitle;
       this.ogDescription = res.ogDescription;
       this.ogImage = res.ogImage;
+      this.ogImageWidth = res.ogImageWidth;
+      this.ogImageHeight = res.ogImageHeight;
       this.ogUrl = res.ogUrl;
       this.ogSiteName = res.ogSiteName;
 
@@ -255,6 +259,8 @@ class OGPEmbed extends Block {
     this.ogTitle = null;
     this.ogDescription = null;
     this.ogImage = null;
+    this.ogImageWidth = null;
+    this.ogImageHeight = null;
     this.ogUrl = null;
     this.ogSiteName = null;
   }

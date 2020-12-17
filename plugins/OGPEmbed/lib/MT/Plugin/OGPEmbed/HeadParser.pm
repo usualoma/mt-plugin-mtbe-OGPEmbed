@@ -37,14 +37,14 @@ sub start {
             = ( $attr->{property} || "" ) =~ m{^og:}i                    ? $attr->{property}
             : ( $attr->{name}     || "" ) =~ m{^description$|^twitter:}i ? $attr->{name}
             :                                                              undef;
-        $self->{hash}{ lc $name } = $attr->{content} if $name;
+        $self->{hash}{ lc $name } ||= $attr->{content} if $name;
     }
     elsif ( $tag eq 'link' ) {
         my $name
             = ( $attr->{rel} || "" ) =~ m{^canonical$}i         ? $attr->{rel}
             : ( $attr->{rel} || "" ) =~ m{\b(shortcut|icon)\b}i ? 'icon'
             :                                                     undef;
-        $self->{hash}{ lc $name } = $attr->{href} if $name;
+        $self->{hash}{ lc $name } ||= $attr->{href} if $name;
     }
     elsif ( $tag =~ /^(?:title)$/ ) {
         $self->{tag}  = lc $tag;

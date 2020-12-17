@@ -75,6 +75,9 @@ const Html: React.FC<HtmlProps> = ({ block }: HtmlProps) => {
   display: flex;
   text-decoration: none;
 }
+.ogpembed-card:hover {
+  border-color: #ccc;
+}
 .ogpembed-card__image img {
   max-width: 200px;
   max-height: 200px;

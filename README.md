@@ -3,6 +3,12 @@
 This is a plugin for the Movable Type.
 This plugin provides block editor block types for embed other site by OGP infomation.
 
+![Screenshot](https://raw.githubusercontent.com/usualoma/mt-plugin-mtbe-OGPEmbed/main/artwork/screenshot.jpg)
+
+## Demo
+
+https://youtu.be/hoPRquDz6Zg
+
 ## Installation
 
 1. Download an archive file from [releases](https://github.com/usualoma/mt-plugin-mtbe-OGPEmbed/releases).

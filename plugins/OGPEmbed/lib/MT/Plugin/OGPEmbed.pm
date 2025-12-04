@@ -68,7 +68,7 @@ sub resolve {
                     ( $hash->{"og:image:width"} ? int( $hash->{"og:image:width"} ) : undef ),
                 ogImageHeight =>
                     ( $hash->{"og:image:height"} ? int( $hash->{"og:image:height"} ) : undef ),
-                ogUrl      => $hash->{"og:url"}       || $hash->{"canonical"} || '',
+                ogUrl      => $hash->{"og:url"}       || $hash->{"canonical"} || $url,
                 ogSiteName => $hash->{"og:site_name"} || '',
             }
         )

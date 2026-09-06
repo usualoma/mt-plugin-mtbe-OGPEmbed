@@ -14,7 +14,7 @@ import Block, {
 } from "mt-block-editor-block/Block";
 
 import icon from "../img/icon/ogpembed.svg";
-import css from "../css/OGPEmbed.scss";
+import css from "../css/OGPEmbed.module.css";
 
 interface EditorProps {
   block: OGPEmbed;
@@ -234,7 +234,7 @@ class OGPEmbed extends Block {
     </div>
   </div>
 </a>`;
-    } catch (e) {
+    } catch {
       this.reset();
       this.compiledHtml = t(
         "Could not retrieve HTML for embedding from {{URL}}",

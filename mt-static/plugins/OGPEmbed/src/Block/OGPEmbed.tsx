@@ -214,10 +214,11 @@ class OGPEmbed extends Block {
 
       const url = new URL(res.ogUrl || this.url);
       const name = url.hostname;
-      const icon = this.icon.match(/^https?:/)
-        ? this.icon
-        : this.icon.match(/^\/[^\/]/)
-        ? url.origin + this.icon
+      const resolvedIcon = this.icon || "";
+      const icon = resolvedIcon.match(/^https?:/)
+        ? resolvedIcon
+        : resolvedIcon.match(/^\/[^/]/)
+        ? url.origin + resolvedIcon
         : "";
 
       this.compiledHtml = `<a class="ogpembed-card" href="${this.ogUrl}">

@@ -14,7 +14,7 @@ import Block, {
 } from "mt-block-editor-block/Block";
 
 import icon from "../img/icon/ogpembed.svg";
-import css from "../css/OGPEmbed.scss";
+import css from "../css/OGPEmbed.module.css";
 
 interface EditorProps {
   block: OGPEmbed;
@@ -214,10 +214,11 @@ class OGPEmbed extends Block {
 
       const url = new URL(res.ogUrl || this.url);
       const name = url.hostname;
-      const icon = this.icon.match(/^https?:/)
-        ? this.icon
-        : this.icon.match(/^\/[^\/]/)
-        ? url.origin + this.icon
+      const resolvedIcon = this.icon || "";
+      const icon = resolvedIcon.match(/^https?:/)
+        ? resolvedIcon
+        : resolvedIcon.match(/^\/[^/]/)
+        ? url.origin + resolvedIcon
         : "";
 
       this.compiledHtml = `<a class="ogpembed-card" href="${this.ogUrl}">
@@ -233,7 +234,7 @@ class OGPEmbed extends Block {
     </div>
   </div>
 </a>`;
-    } catch (e) {
+    } catch {
       this.reset();
       this.compiledHtml = t(
         "Could not retrieve HTML for embedding from {{URL}}",

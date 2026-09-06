@@ -10,6 +10,7 @@ MYMETA.*
 blib
 pm_to_blib
 node_modules/
+coverage/
 
 mt-static/plugins/OGPEmbed/dist/*.min.js
 mt-static/plugins/OGPEmbed/dist/*.min.css

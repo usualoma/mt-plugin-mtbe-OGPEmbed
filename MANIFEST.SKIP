@@ -21,8 +21,8 @@ Gruntfile
 package.json
 package-lock.json
 tsconfig.json
-webpack.config.js
-i18next-parser.config.js
+vite.config.ts
+eslint.config.js
 ^tools/
 
 # npm working directory
@@ -37,6 +37,8 @@ i18next-parser.config.js
 
 # test
 ^t/
+^tests/
+^coverage/
 
 # source files
 mt-static/plugins/OGPEmbed/typings/

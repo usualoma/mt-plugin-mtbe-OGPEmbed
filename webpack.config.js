@@ -1,6 +1,5 @@
 /* eslint-env node */
 const path = require("path");
-const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = async function (_, env) {
@@ -20,7 +19,6 @@ module.exports = async function (_, env) {
       jquery: "jQuery",
     },
     plugins: [
-      new CleanWebpackPlugin(),
       new MiniCssExtractPlugin({
         filename: "[name].css",
         chunkFilename: "[id].css",
@@ -29,6 +27,7 @@ module.exports = async function (_, env) {
     output: {
       path: path.resolve(__dirname, "mt-static/plugins/OGPEmbed/dist"),
       filename: "[name].js",
+      clean: true,
     },
     module: {
       rules: [
@@ -43,11 +42,14 @@ module.exports = async function (_, env) {
           test: /\.scss$/,
           use: [
             isProd ? MiniCssExtractPlugin.loader : "style-loader",
-            { loader: "css-loader", options: { modules: true } },
+            {
+              loader: "css-loader",
+              options: { modules: { namedExport: false } },
+            },
             { loader: "postcss-loader", options: { sourceMap: isProd } },
           ],
         },
-        { test: /\.svg$/, use: "svg-url-loader" },
+        { test: /\.svg$/, type: "asset/inline" },
       ],
     },
     watchOptions: {
